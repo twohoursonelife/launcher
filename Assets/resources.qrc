@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="Images" lang="English">
+    <file alias="2HOL_Logo_16px">2HOL_Logo_16px.png</file>
+    <file alias="2HOL_Logo_24px">2HOL_Logo_24px.png</file>
+    <file alias="Discord_Logo_24px">DiscordLogo_24px.png</file>
+    <file alias="Gamepedia_Logo_24px">Gamepedia_Logo_24px.png</file>
+    <file alias="OneTech_Logo_24px">OneTech_24px.png</file>
+    <file alias="Patreon_Logo_24px">Patreon_24px.png</file>
+    <file alias="Reset_16px_Hover">Reset_16px_Hover.png</file>
+    <file alias="Reset_24px_Hover">Reset_24px_Hover.png</file>
+    <file alias="THOLLauncherHeaderIMG">THOLLauncherHeaderIMG.png</file>
+    <file alias="WorldIcon_grey_24px_01">WorldIcon_grey_24px_01.png</file>
+  </qresource>
+  <qresource prefix="Fonts"/>
+</RCC>

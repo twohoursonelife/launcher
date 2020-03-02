@@ -1,0 +1,5 @@
+CONVERT RESOURCES.QRC TO RESOURCES_RC.PY
+pyrcc5 resources.qrc -o resources_rc.py
+
+CONVERT *.UI FILE TO *.PY FILE
+pyuic5 -x sample.ui -o samply.py
