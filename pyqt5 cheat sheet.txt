@@ -1,12 +1,27 @@
 [ P y Q t 5   C h e a t   S h e e t ]
 
----CONVERT RESOURCES.QRC TO RESOURCES_RC.PY---
+--- CONVERT RESOURCES.QRC TO RESOURCES_RC.PY ---
 Qt Designer accesses any images and creates a *.qrc file.
 It stores the image directory path and the alias.
 This makes relocating and changing images a bit easier.
-    pyrcc5 resources.qrc -o resources_rc.py
+Once you have set up resources in Qt Designer, a *.qrc file will be created.
+The *.qrc file can have any name you want, as long as
+the converted *.py has the same same, plus _rc.
+So resources.qrc needs to be named resources_rc.py.
+Otherwise you get an error.
+>>>	pyrcc5 resources.qrc -o resources_rc.py
+• "-o" stands for output
 
----CONVERT *.UI FILE TO *.PY FILE---
+
+--- CONVERT *.UI FILE TO *.PY FILE ---
 Qt Designer uses *.ui files to store the designed GUI.
 To be able to use it for python, open the CMD/Terminal and type:
-    pyuic5 -x sample.ui -o samply.py
+>>>	pyuic5 -x sample.ui -o samply.py
+• "-o" stands for output
+• "-x" 
+
+
+--- CONVERT *.PY FILE TO ONE *.EXE FILE ---
+>>>	pyinstaller --onefile -w sample.py
+• "--onefile" to save the program in one single *.exe
+• "-w" to deactivate the CMD/terminal appearing

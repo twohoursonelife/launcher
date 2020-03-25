@@ -8,4 +8,8 @@
     <file alias="Reset_Icon_16px">Assets/Reset_16px_Hover.png</file>
     <file alias="THOL_LauncherHeaderIMG">Assets/THOLLauncherHeaderIMG.png</file>
   </qresource>
+  <qresource prefix="Fonts">
+    <file>Assets/SourceSansPro-Regular.ttf</file>
+    <file>Assets/Reset_16px_Hover.png</file>
+  </qresource>
 </RCC>
