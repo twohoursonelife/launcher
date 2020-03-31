@@ -101,44 +101,45 @@ class widget_interact:
 
     # Reads stored text field(LE) value from *.ini setting file and
     # displays it in launcher.
-    def LE_read_ini(self):
-        with open(self.iniFilePath, "r") as varLERead:
+    def LE_read_ini(self, iniFilePath):
+        with open(iniFilePath, "r") as varLERead:
             self.iniLEContent = varLERead.read()
         self.widget.setText(self.iniLEContent)
         print("LineEdit Content: ", self.iniLEContent)
 
     # Reads stored checkbox(cBx) value from *.ini setting file and
     # displays it in launcher. Triggers check whether it is default value.
-    def cBx_read_ini(self):
-        with open(self.iniFilePath, "r") as varCBRead:
+    def cBx_read_ini(self, iniFilePath, default_value):
+        with open(iniFilePath, "r") as varCBRead:
             self.iniCBContent = varCBRead.read()
         print("of type:", type(self.iniCBContent))
         print("Current cBx borderless:", self.iniCBContent)
-        if (self.iniCBContent != "0") and (self.iniCBContent != "1"):
-            self.iniCBContent = self.default_value
-            self.cBx_write_ini()
+        # if (self.iniCBContent != "0") and (self.iniCBContent != "1"):
+        #     self.iniCBContent = default_value
+        #     self.cBx_write_ini()
         self.widget.setChecked(int(self.iniCBContent))
-        self.cBx_default_visib()
+        self.cBx_default_visib(iniFilePath)
         print("Checkbox Content: ", self.iniCBContent)
 
     # Writes chosen text field(LE) content to according *.ini setting file.
     def LE_write_ini(self):
         with open(self.iniFilePath, "w") as self.varLEWrite:
             self.varLEWrite.write(self.widget.text())
-        print("Writing:", self.widget.text(), "\nto:", self.iniFilePath)
+        print("iniFilePath =", self.iniFilePath)
+        # print("Writing:", self.widget.text(), "\nto:", iniFilePath)
 
     # Writes chosen checkbox(cBx) setting to according *.ini setting file,
     # then triggers 'cBx_default_visib()'.
-    def cBx_write_ini(self):
-        with open(self.iniFilePath, "w") as self.varCBWrite:
+    def cBx_write_ini(self, iniFilePath):
+        with open(iniFilePath, "w") as self.varCBWrite:
             self.varCBWrite.write(str(int(self.widget.isChecked())))
-        print("Writing:", self.widget.isChecked(), "\nto:", self.iniFilePath)
-        self.cBx_default_visib()
+        print("Writing:", self.widget.isChecked(), "\nto:", iniFilePath)
+        self.cBx_default_visib(iniFilePath)
 
     # makes the reset button visible/invisible,
     # depending on according default value.
-    def cBx_default_visib(self):
-        with open(self.iniFilePath, "r") as varCBRead:
+    def cBx_default_visib(self, iniFilePath):
+        with open(iniFilePath, "r") as varCBRead:
             self.iniCBContent2 = int(varCBRead.read())
         print("is default value?:", self.iniCBContent2)
         if self.iniCBContent2 == int(self.default_value):
@@ -167,11 +168,11 @@ vsync_class = widget_interact(MainWindow.cBx_VSync, MainWindow.Btn_VSync_Reset, 
 
 # --- READ SETTINGS FROM *.INI ---
 # initiates reading of the *.ini files
-username_class.LE_read_ini()
-key_class.LE_read_ini()
-fullscreen_class.cBx_read_ini()
-borderless_class.cBx_read_ini()
-vsync_class.cBx_read_ini()
+username_class.LE_read_ini(vars.ini_email)
+key_class.LE_read_ini(vars.ini_key)
+fullscreen_class.cBx_read_ini(vars.ini_fullscreen, vars.default_fullscreen)
+borderless_class.cBx_read_ini(vars.ini_borderless, vars.default_borderless)
+vsync_class.cBx_read_ini(vars.ini_vsync, vars.default_vsync)
 
 # --- WRITE SETTINGS TO *.INI ---
 # Text Fields (Line Edits(LE))
@@ -182,9 +183,9 @@ MainWindow.LE_Key.editingFinished.connect(key_class.LE_write_ini)
 # CheckBoxes (cBx)
 # When the checkbox is clicked, it writes the new state to the setting *.ini and
 # sets the visibility of the 
-MainWindow.cBx_Fullscreen.stateChanged.connect(fullscreen_class.cBx_write_ini)
-MainWindow.cBx_Borderless.stateChanged.connect(borderless_class.cBx_write_ini)
-MainWindow.cBx_VSync.stateChanged.connect(vsync_class.cBx_write_ini)
+MainWindow.cBx_Fullscreen.stateChanged.connect(fullscreen_class.cBx_write_ini(vars.ini_fullscreen))
+MainWindow.cBx_Borderless.stateChanged.connect(borderless_class.cBx_write_ini(vars.ini_borderless))
+MainWindow.cBx_VSync.stateChanged.connect(vsync_class.cBx_write_ini(vars.ini_vsync))
 
 # --- RESET SETTINGS FROM defaultSettings.ini
 # CheckBoxes (cBx)
